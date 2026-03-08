@@ -1,0 +1,17 @@
+Options -Indexes
+
+# Route all requests to index.php (except existing files/dirs)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /Assignments/Assign01/
+
+    # Allow direct access to real files (css, images, etc.)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Send everything else to front controller
+    RewriteRule ^ index.php [L,QSA]
+</IfModule>
+
+# Hide PHP errors in production – remove for development
+# php_flag display_errors Off
